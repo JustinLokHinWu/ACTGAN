@@ -2,14 +2,12 @@ import torch
 from torch import nn, optim
 import numpy as np
 
-# from utils.logger import Logger
-from utils.newlogger import Logger
+from utils.logger import Logger
 from utils.helpers import *
 import utils.helpers
 
 def train(cfg, dataloader):
     logger = Logger()
-    # logger = Logger(model_name='ACGAN-Transformer', data_name=cfg.logger_data_name)
 
     generator, discriminator = utils.helpers.setup_models(cfg)
     generator.apply(weights_init)
@@ -26,12 +24,8 @@ def train(cfg, dataloader):
     test_noise, test_labels = create_test_samples(cfg)
 
     num_batches = len(dataloader)
-    # logger.writer.add_scalar('Loss/train', np.random.random(), 0)
-    # logger.writer.close()
-        
+
     for epoch in range(cfg.num_epochs):
-        disc_error = 0
-        gen_error = 0
         for batch, (real_batch, real_labels) in enumerate(dataloader):
             if cfg.cuda:
                 real_batch = real_batch.cuda()
@@ -93,7 +87,6 @@ def train(cfg, dataloader):
 
         test_images = generator(test_noise, test_labels)
         logger.log_images('Test Images', test_images, epoch)
-        # logger.log_losses(gen_error, disc_error, epoch)
         if epoch % cfg.epoch_save_rate == 0:
             logger.save_models(generator, discriminator, epoch)
 
