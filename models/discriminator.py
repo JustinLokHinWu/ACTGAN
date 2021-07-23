@@ -11,6 +11,8 @@ class ACT_Discriminator(nn.Module):
         # Size of embedding used by transformer
         self.embed_dim = args.disc_embed_dim
 
+        self.num_channels = args.num_channels
+
         # Number of patches in each direction
         self.num_patches_w = 8
         # Number of patches, i.e. square of number of patches in each direction
@@ -72,10 +74,8 @@ class ACT_Discriminator(nn.Module):
             nn.Linear(self.embed_dim * self.num_patches, 128),
             nn.LeakyReLU(0.2),
             nn.Linear(128, args.n_classes),
-            nn.LogSoftmax()
+            nn.LogSoftmax(dim=1)
         )
-
-        self.num_channels = 3
         
     def forward(self, x):
         # Make sure input is Batch x Channels x H x W
