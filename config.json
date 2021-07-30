@@ -1,0 +1,22 @@
+{
+    "n_classes": 10, 
+    "image_size": 32,  
+    "batch_size": 100,
+    "cuda": true,
+    "dataset": "cifar",
+    "num_channels": 3,
+    "data_dir": "./datasets",
+    "models_dir": "./data/models",
+    "noise_size": 100,
+    "beta1": 0.9,
+    "beta2": 0.999,
+    "momentum": 0.9,
+    "num_epochs": 501,
+    "d_lr": 0.0002,
+    "g_lr": 0.0002,
+    "disc_image_patch_size": 1,
+    "disc_embed_dim": 128,
+    "disc_heads": 4,
+    "disc_transformer_layers": 3,
+    "epoch_save_rate": 20
+}

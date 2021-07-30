@@ -7,7 +7,7 @@ from utils.helpers import *
 import utils.helpers
 
 def train(cfg, dataloader):
-    logger = Logger()
+    logger = Logger(cfg.models_dir)
 
     generator, discriminator = utils.helpers.setup_models(cfg)
     generator.apply(weights_init)

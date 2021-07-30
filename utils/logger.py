@@ -6,9 +6,10 @@ import errno
 from torch.utils.tensorboard import SummaryWriter
 
 class Logger:
-    def __init__(self):
+    def __init__(self, models_dir):
         self.writer = SummaryWriter()
         self.name = self.writer.get_logdir().split("\\")[1]
+        self.models_dir = models_dir
 
     def log_images(self, tag, images, epoch):
         transformed_images = (images / 2.0) + 0.5

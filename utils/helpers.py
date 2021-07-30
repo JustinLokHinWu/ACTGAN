@@ -1,9 +1,11 @@
 import torch
 from torch.autograd.variable import Variable
+from models.discriminator import ACT_Discriminator
+from models.generator import ACGAN_Generator
 
 def setup_models(args):
-    g = args.generator(args)
-    d = args.discriminator(args)
+    g = ACGAN_Generator(args)
+    d = ACT_Discriminator(args)
     if args.cuda:
         g = g.cuda()
         d = d.cuda()
