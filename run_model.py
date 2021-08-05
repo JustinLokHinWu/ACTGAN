@@ -1,12 +1,10 @@
 import argparse
 
 from torchvision import transforms
-from models.generator import ACGAN_Generator
 from attrdict import AttrDict
 import json
 import torch
 import glob
-from PIL import Image
 from models.generator import ACGAN_Generator
 from utils.helpers import noise, label_to_onehot
 
@@ -37,11 +35,15 @@ class GeneratorRunner:
             return None
 
         try:
-            t = torch.load('{}/G_epoch_{}'.format(self.models_dir, epoch))
+            if self.cuda:
+                t = torch.load('{}/G_epoch_{}'.format(self.models_dir, epoch))
+            else:
+                t = torch.load(
+                    '{}/G_epoch_{}'.format(self.models_dir, epoch),
+                    map_location=torch.device('cpu'))
             self.generator.load_state_dict(t)
         except:
             return None
-        
         if seed:
             torch.manual_seed(seed)
 
