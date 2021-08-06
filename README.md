@@ -1,4 +1,5 @@
 # ACTGAN
+Contributors: [Justin Wu](http://github.com/JustinLokHinWu), [Simon Aayani](https://github.com/SimonAayani)
 
 TODO: Description
 
