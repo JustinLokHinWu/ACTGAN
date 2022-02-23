@@ -3,3 +3,4 @@ __pycache__
 datasets
 runs
 data
+.DS_Store
